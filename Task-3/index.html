@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discussion Forum</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body{
+            background-color: aquamarine;
+        }
+        h1{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Discussion Forum</h1>
+        <div class="row">
+            <div class="col-md-8">
+                <div id="forum-posts">    
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <br><br>
+                <h4>Create a New Post</h4>
+                <form id="post-form">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="post-content">Post Content</label>
+                        <textarea id="post-content" class="form-control" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+      
+        const postForm = document.getElementById('post-form');
+        const forumPosts = document.getElementById('forum-posts');
+
+        postForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const postContent = document.getElementById('post-content').value;
+
+            if (username && postContent) {
+                const post = document.createElement('div');
+                post.classList.add('alert', 'alert-primary', 'mt-2');
+                post.innerHTML = `
+                    <strong>${username}</strong>
+                    <p>${postContent}</p>
+                `;
+                forumPosts.appendChild(post);
+
+               
+                document.getElementById('username').value = '';
+                document.getElementById('post-content').value = '';
+            } else {
+                alert('Please fill in both fields.');
+            }
+        });
+    </script>
+</body>
+</html>
